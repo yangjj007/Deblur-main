@@ -170,6 +170,17 @@ if st.session_state["running"]:
         mse = np.mean((L - target_image) ** 2)
         st.write(f"Final MSE against the target image: {mse:.4f}")
         st.success("All iterations completed!")
+        
+        # 计算模糊图像和目标图像之间的 MSE
+        blurred_mse = np.mean((I - target_image) ** 2)
+
+        # 计算提升百分比
+        improvement_percentage = ((blurred_mse - mse) / blurred_mse) * 100
+
+        # 输出结果
+        st.write(f"MSE between blurred image and target image: {blurred_mse:.4f}")
+        st.write(f"Improvement percentage: {improvement_percentage:.2f}%")
+
 
     except Exception as e:
         st.error(f"An error occurred: {e}")
